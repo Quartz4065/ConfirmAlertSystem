@@ -15,11 +15,11 @@
         window.OneSignalDeferred = window.OneSignalDeferred || [];
         OneSignalDeferred.push(async function(OneSignal) {
             await OneSignal.init({
-                appId: "587977cc-fe89-4ed0-bd95-0b156cdf4f2e",  // Replace with your actual OneSignal App ID
+                appId: "587977cc-fe89-4ed0-bd95-0b156cdf4f2e",  // Your OneSignal App ID
                 notifyButton: {
                     enable: true,  // Enable notification subscription button
                 },
-                serviceWorkerPath: 'OneSignalSDKWorker.js',  // Path to service worker file
+                serviceWorkerPath: 'OneSignalSDKWorker.js',  // Correct path to OneSignal service worker
                 serviceWorkerUpdaterPath: 'OneSignalSDKUpdaterWorker.js'  // Path to updater service worker
             });
         });
