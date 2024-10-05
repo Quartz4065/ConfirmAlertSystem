@@ -19,42 +19,14 @@
                 notifyButton: {
                     enable: true,  // Enable notification subscription button
                 },
-                welcomeNotification: {
-                    title: "Welcome!",
-                    message: "Thank you for subscribing to notifications.",
-                }
+                serviceWorkerPath: 'OneSignalSDKWorker.js',  // Path to service worker file
+                serviceWorkerUpdaterPath: 'OneSignalSDKUpdaterWorker.js'  // Path to updater service worker
             });
         });
     </script>
 </head>
 <body>
     <h1>Appointment Reminder System</h1>
-
-    <div class="form-container">
-        <label for="patient-name">Patient Name:</label>
-        <input type="text" id="patient-name" required>
-        
-        <label for="location">Location:</label>
-        <input type="text" id="location" required>
-        
-        <label for="appointment-time">Appointment Time:</label>
-        <input type="datetime-local" id="appointment-time" required>
-        
-        <label for="reminder-time">Reminder Time:</label>
-        <input type="datetime-local" id="reminder-time" required>
-
-        <button onclick="setReminder()">Set Reminder</button>
-    </div>
-
-    <div id="status"></div>
-
-    <h2>Scheduled Reminders</h2>
-    <ul id="reminder-list"></ul>
-
-    <!-- External JavaScript for handling logic -->
-    <script src="script.js"></script>
-</body>
-</html>
 
     <div class="form-container">
         <label for="patient-name">Patient Name:</label>
