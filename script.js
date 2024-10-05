@@ -21,6 +21,7 @@ async function setReminder() {
     console.log("Reminder Time: ", reminderTime);
 
     if (!patientName || !location || !appointmentTime || !reminderTime) {
+        console.log('Validation Failed: Missing input');
         document.getElementById('status').textContent = 'Please fill out all fields.';
         return;
     }
@@ -66,7 +67,7 @@ function notifyUser(reminderId) {
         OneSignal.sendSelfNotification(
             "Reminder",
             "Time to call and confirm the appointment!",
-            "https://quartz4065.github.io",  // Replace with your site URL
+            "https://quartz4065.github.io/ConfirmAlertSystem/",  // Corrected site URL
             {
                 action: "confirm",
                 actionText: "Mark as Completed"
