@@ -53,3 +53,26 @@
     <script src="script.js"></script>
 </body>
 </html>
+        <input type="text" id="patient-name" required>
+        
+        <label for="location">Location:</label>
+        <input type="text" id="location" required>
+        
+        <label for="appointment-time">Appointment Time:</label>
+        <input type="datetime-local" id="appointment-time" required>
+        
+        <label for="reminder-time">Reminder Time:</label>
+        <input type="datetime-local" id="reminder-time" required>
+
+        <button onclick="setReminder()">Set Reminder</button>
+    </div>
+
+    <div id="status"></div>
+
+    <h2>Scheduled Reminders</h2>
+    <ul id="reminder-list"></ul>
+
+    <!-- External JavaScript for handling logic -->
+    <script src="script.js"></script>
+</body>
+</html>
