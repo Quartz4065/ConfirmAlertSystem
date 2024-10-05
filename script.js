@@ -1,7 +1,7 @@
 // Initialize Supabase via CDN (no import needed)
 const supabaseUrl = 'https://akyxjjugvoygatvmdcew.supabase.co';  // Replace with your actual Supabase URL
 const supabaseKey = 'your-supabase-anon-key';  // Replace with your actual Supabase anon key
-const supabase = Supabase.createClient(supabaseUrl, supabaseKey);
+const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 document.addEventListener('DOMContentLoaded', loadReminders);
 
