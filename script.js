@@ -1,7 +1,6 @@
 // Initialize Supabase
-const supabaseUrl = 'https://akyxjjugvoygatvmdcew.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFreXhqanVndm95Z2F0dm1kY2V3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjgxMzgzNTksImV4cCI6MjA0MzcxNDM1OX0.tYy2TURvZA0FPteFMANyVWQe8urI7_Ilg8mrDEnA-cs
-';
+const supabaseUrl = 'https://akyxjjugvoygatvmdcew.supabase.co';  // Replace with your Supabase URL
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFreXhqanVndm95Z2F0dm1kY2V3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjgxMzgzNTksImV4cCI6MjA0MzcxNDM1OX0.tYy2TURvZA0FPteFMANyVWQe8urI7_Ilg8mrDEnA-cs';  // Replace with your Supabase API key
 const supabase = Supabase.createClient(supabaseUrl, supabaseKey);
 
 document.addEventListener('DOMContentLoaded', loadReminders);
@@ -16,23 +15,29 @@ async function setReminder() {
         document.getElementById('status').textContent = 'Please fill out all fields.';
         return;
     }
-    const { data, error } = await supabase
-        .from('appointments')
-        .insert([{ 
-            patient_name: patientName, 
-            location, 
-            appointment_time: appointmentTime, 
-            reminder_time: reminderTime,
-            completed: false
-        }]);
 
-    if (error) {
-        console.error('Error storing appointment:', error);
-        document.getElementById('status').textContent = 'Error setting the reminder.';
-    } else {
-        document.getElementById('status').textContent = `Reminder set for ${reminderTime}`;
-        addReminderToUI(data[0]);
-        schedulePushNotification(new Date(reminderTime), data[0].id);
+    try {
+        const { data, error } = await supabase
+            .from('appointments')
+            .insert([{ 
+                patient_name: patientName, 
+                location, 
+                appointment_time: appointmentTime, 
+                reminder_time: reminderTime,
+                completed: false
+            }]);
+
+        if (error) {
+            console.error('Error storing appointment:', error);
+            document.getElementById('status').textContent = 'Error setting the reminder.';
+        } else {
+            console.log('Reminder saved:', data);
+            document.getElementById('status').textContent = `Reminder set for ${reminderTime}`;
+            addReminderToUI(data[0]);
+            schedulePushNotification(new Date(reminderTime), data[0].id);
+        }
+    } catch (err) {
+        console.error('Unexpected error:', err);
     }
 }
 
