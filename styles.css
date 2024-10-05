@@ -1,45 +1,103 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Appointment Reminder System</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-    <script>
-        window.OneSignal = window.OneSignal || [];
-        OneSignal.push(function() {
-            OneSignal.init({
-                appId: "your-onesignal-app-id",
-            });
-        });
-    </script>
-</head>
-<body>
-    <h1>Appointment Reminder System</h1>
+// Initialize Supabase
+const supabaseUrl = 'https://your-project-url.supabase.co';
+const supabaseKey = 'your-supabase-api-key';
+const supabase = Supabase.createClient(supabaseUrl, supabaseKey);
 
-    <div class="form-container">
-        <label for="patient-name">Patient Name:</label>
-        <input type="text" id="patient-name" required>
-        
-        <label for="location">Location:</label>
-        <input type="text" id="location" required>
-        
-        <label for="appointment-time">Appointment Time:</label>
-        <input type="datetime-local" id="appointment-time" required>
-        
-        <label for="reminder-time">Reminder Time:</label>
-        <input type="datetime-local" id="reminder-time" required>
+document.addEventListener('DOMContentLoaded', loadReminders);
 
-        <button onclick="setReminder()">Set Reminder</button>
-    </div>
+async function setReminder() {
+    const patientName = document.getElementById('patient-name').value;
+    const location = document.getElementById('location').value;
+    const appointmentTime = document.getElementById('appointment-time').value;
+    const reminderTime = document.getElementById('reminder-time').value;
 
-    <div id="status"></div>
+    if (!patientName || !location || !appointmentTime || !reminderTime) {
+        document.getElementById('status').textContent = 'Please fill out all fields.';
+        return;
+    }
 
-    <h2>Scheduled Reminders</h2>
-    <ul id="reminder-list"></ul>
+    // Store the appointment in Supabase
+    const { data, error } = await supabase
+        .from('appointments')
+        .insert([{ 
+            patient_name: patientName, 
+            location, 
+            appointment_time: appointmentTime, 
+            reminder_time: reminderTime,
+            completed: false
+        }]);
 
-    <script src="script.js"></script>
-</body>
-</html>
+    if (error) {
+        console.error('Error storing appointment:', error);
+        document.getElementById('status').textContent = 'Error setting the reminder.';
+    } else {
+        document.getElementById('status').textContent = `Reminder set for ${reminderTime}`;
+        addReminderToUI(data[0]);
+        schedulePushNotification(new Date(reminderTime), data[0].id);
+    }
+}
+
+function schedulePushNotification(reminderTime, reminderId) {
+    const now = new Date();
+    const timeUntilReminder = reminderTime - now;
+
+    if (timeUntilReminder > 0) {
+        setTimeout(() => {
+            notifyUser(reminderId);
+        }, timeUntilReminder);
+    }
+}
+
+function notifyUser(reminderId) {
+    OneSignal.push(function() {
+        OneSignal.sendSelfNotification(
+            "Reminder",
+            "Time to call and confirm the appointment!",
+            "https://your-site.com",
+            {
+                action: "confirm",
+                actionText: "Mark as Completed"
+            }
+        );
+    });
+}
+
+async function loadReminders() {
+    const { data: reminders, error } = await supabase
+        .from('appointments')
+        .select('*')
+        .eq('completed', false);
+
+    if (error) {
+        console.error('Error loading reminders:', error);
+    } else {
+        reminders.forEach(addReminderToUI);
+    }
+}
+
+function addReminderToUI(reminder) {
+    const reminderList = document.getElementById('reminder-list');
+    const listItem = document.createElement('li');
+    listItem.classList.add('reminder-item');
+    listItem.id = `reminder-${reminder.id}`;
+    listItem.innerHTML = `
+        <strong>${reminder.patient_name}</strong> - ${reminder.location}<br>
+        Appointment Time: ${new Date(reminder.appointment_time).toLocaleString()}<br>
+        Reminder Time: ${new Date(reminder.reminder_time).toLocaleString()}<br>
+        <button onclick="markAsCompleted('${reminder.id}')">Mark as Completed</button>
+    `;
+    reminderList.appendChild(listItem);
+}
+
+async function markAsCompleted(reminderId) {
+    const { error } = await supabase
+        .from('appointments')
+        .update({ completed: true })
+        .eq('id', reminderId);
+
+    if (error) {
+        console.error('Error marking as completed:', error);
+    } else {
+        document.getElementById(`reminder-${reminderId}`).remove();
+    }
+}
