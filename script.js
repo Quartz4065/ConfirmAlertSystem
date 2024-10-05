@@ -1,6 +1,6 @@
 // Initialize Supabase
-const supabaseUrl = 'https://akyxjjugvoygatvmdcew.supabase.co';  // Replace with your Supabase URL
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFreXhqanVndm95Z2F0dm1kY2V3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjgxMzgzNTksImV4cCI6MjA0MzcxNDM1OX0.tYy2TURvZA0FPteFMANyVWQe8urI7_Ilg8mrDEnA-cs';  // Replace with your Supabase API key
+const supabaseUrl = 'https://akyxjjugvoygatvmdcew.supabase.co';  // Replace with your actual Supabase URL
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFreXhqanVndm95Z2F0dm1kY2V3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjgxMzgzNTksImV4cCI6MjA0MzcxNDM1OX0.tYy2TURvZA0FPteFMANyVWQe8urI7_Ilg8mrDEnA-cs';  // Replace with your actual Supabase API key
 const supabase = Supabase.createClient(supabaseUrl, supabaseKey);
 
 document.addEventListener('DOMContentLoaded', loadReminders);
@@ -11,7 +11,15 @@ async function setReminder() {
     const appointmentTime = document.getElementById('appointment-time').value;
     const reminderTime = document.getElementById('reminder-time').value;
 
+    // Log form values for debugging
+    console.log("Form Values:");
+    console.log("Patient Name: ", patientName);
+    console.log("Location: ", location);
+    console.log("Appointment Time: ", appointmentTime);
+    console.log("Reminder Time: ", reminderTime);
+
     if (!patientName || !location || !appointmentTime || !reminderTime) {
+        console.log('Validation Failed: Missing input');
         document.getElementById('status').textContent = 'Please fill out all fields.';
         return;
     }
@@ -21,23 +29,23 @@ async function setReminder() {
             .from('appointments')
             .insert([{ 
                 patient_name: patientName, 
-                location, 
+                location: location, 
                 appointment_time: appointmentTime, 
                 reminder_time: reminderTime,
                 completed: false
             }]);
 
         if (error) {
-            console.error('Error storing appointment:', error);
+            console.error('Supabase Error: ', error);
             document.getElementById('status').textContent = 'Error setting the reminder.';
         } else {
-            console.log('Reminder saved:', data);
+            console.log('Reminder Saved Successfully: ', data);
             document.getElementById('status').textContent = `Reminder set for ${reminderTime}`;
             addReminderToUI(data[0]);
             schedulePushNotification(new Date(reminderTime), data[0].id);
         }
     } catch (err) {
-        console.error('Unexpected error:', err);
+        console.error('Unexpected Error: ', err);
     }
 }
 
@@ -73,7 +81,7 @@ async function loadReminders() {
         .eq('completed', false);
 
     if (error) {
-        console.error('Error loading reminders:', error);
+        console.error('Error loading reminders: ', error);
     } else {
         reminders.forEach(addReminderToUI);
     }
@@ -100,7 +108,7 @@ async function markAsCompleted(reminderId) {
         .eq('id', reminderId);
 
     if (error) {
-        console.error('Error marking as completed:', error);
+        console.error('Error marking as completed: ', error);
     } else {
         document.getElementById(`reminder-${reminderId}`).remove();
     }
