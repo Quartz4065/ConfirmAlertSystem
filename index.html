@@ -6,7 +6,7 @@
     <title>Appointment Reminder System</title>
     <link rel="stylesheet" href="styles.css">
 
-    <!-- Supabase SDK (via CDN) -->
+    <!-- Load Supabase CDN here -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
     <!-- OneSignal SDK for Web Push Notifications -->
@@ -19,8 +19,8 @@
                 notifyButton: {
                     enable: true,
                 },
-                serviceWorkerPath: 'OneSignalSDKWorker.js',  // Path to OneSignal service worker
-                serviceWorkerUpdaterPath: 'OneSignalSDKUpdaterWorker.js'  // Path to updater service worker
+                serviceWorkerPath: 'OneSignalSDKWorker.js',
+                serviceWorkerUpdaterPath: 'OneSignalSDKUpdaterWorker.js'
             });
         });
     </script>
@@ -29,6 +29,30 @@
     <h1>Appointment Reminder System</h1>
 
     <div class="form-container">
+        <label for="patient-name">Patient Name:</label>
+        <input type="text" id="patient-name" required>
+        
+        <label for="location">Location:</label>
+        <input type="text" id="location" required>
+        
+        <label for="appointment-time">Appointment Time:</label>
+        <input type="datetime-local" id="appointment-time" required>
+        
+        <label for="reminder-time">Reminder Time:</label>
+        <input type="datetime-local" id="reminder-time" required>
+
+        <button onclick="setReminder()">Set Reminder</button>
+    </div>
+
+    <div id="status"></div>
+
+    <h2>Scheduled Reminders</h2>
+    <ul id="reminder-list"></ul>
+
+    <!-- External JavaScript for handling logic -->
+    <script src="script.js"></script>
+</body>
+</html>
         <label for="patient-name">Patient Name:</label>
         <input type="text" id="patient-name" required>
         
