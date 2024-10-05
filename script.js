@@ -1,9 +1,10 @@
-// Initialize Supabase at the top of the file
-const supabaseUrl = 'https://akyxjjugvoygatvmdcew.supabase.co';  // Replace with your actual Supabase URL
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFreXhqanVndm95Z2F0dm1kY2V3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjgxMzgzNTksImV4cCI6MjA0MzcxNDM1OX0.tYy2TURvZA0FPteFMANyVWQe8urI7_Ilg8mrDEnA-cs';  // Replace with your actual Supabase API key
+import { createClient } from '@supabase/supabase-js'
 
-// Initialize the Supabase client
-const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+// Replace with your actual Supabase URL and anon key
+const supabaseUrl = 'https://akyxjjugvoygatvmdcew.supabase.co'; 
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFreXhqanVndm95Z2F0dm1kY2V3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjgxMzgzNTksImV4cCI6MjA0MzcxNDM1OX0.tYy2TURvZA0FPteFMANyVWQe8urI7_Ilg8mrDEnA-cs
+';  // Replace this with your actual Supabase anon key
+const supabase = createClient(supabaseUrl, supabaseKey);
 
 document.addEventListener('DOMContentLoaded', loadReminders);
 
@@ -14,11 +15,7 @@ async function setReminder() {
     const reminderTime = document.getElementById('reminder-time').value;
 
     // Log form values for debugging
-    console.log("Form Values:");
-    console.log("Patient Name: ", patientName);
-    console.log("Location: ", location);
-    console.log("Appointment Time: ", appointmentTime);
-    console.log("Reminder Time: ", reminderTime);
+    console.log("Form Values:", patientName, location, appointmentTime, reminderTime);
 
     if (!patientName || !location || !appointmentTime || !reminderTime) {
         console.log('Validation Failed: Missing input');
@@ -67,7 +64,7 @@ function notifyUser(reminderId) {
         OneSignal.sendSelfNotification(
             "Reminder",
             "Time to call and confirm the appointment!",
-            "https://quartz4065.github.io/ConfirmAlertSystem/",  // Corrected site URL
+            "https://quartz4065.github.io",  // Replace with your actual site URL
             {
                 action: "confirm",
                 actionText: "Mark as Completed"
