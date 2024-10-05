@@ -67,7 +67,7 @@ function notifyUser(reminderId) {
         OneSignal.sendSelfNotification(
             "Reminder",
             "Time to call and confirm the appointment!",
-            "https://your-site.com",  // Replace with your site URL
+            " https://quartz4065.github.io/ConfirmAlertSystem/",  // Replace with your site URL
             {
                 action: "confirm",
                 actionText: "Mark as Completed"
