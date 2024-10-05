@@ -1,21 +1,19 @@
 // Initialize Supabase via CDN
 const supabaseUrl = 'https://akyxjjugvoygatvmdcew.supabase.co';  // Replace with your actual Supabase URL
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFreXhqanVndm95Z2F0dm1kY2V3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjgxMzgzNTksImV4cCI6MjA0MzcxNDM1OX0.tYy2TURvZA0FPteFMANyVWQe8urI7_Ilg8mrDEnA-cs
+const supabaseKey = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFreXhqanVndm95Z2F0dm1kY2V3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjgxMzgzNTksImV4cCI6MjA0MzcxNDM1OX0.tYy2TURvZA0FPteFMANyVWQe8urI7_Ilg8mrDEnA-cs
 ';  // Replace with your actual Supabase anon key
 const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 document.addEventListener('DOMContentLoaded', loadReminders);
 
 async function setReminder() {
+    const isrName = document.getElementById('isr-name').value;
     const patientName = document.getElementById('patient-name').value;
     const location = document.getElementById('location').value;
     const appointmentTime = document.getElementById('appointment-time').value;
     const reminderTime = document.getElementById('reminder-time').value;
 
-    console.log("Form Values:", patientName, location, appointmentTime, reminderTime);
-
-    if (!patientName || !location || !appointmentTime || !reminderTime) {
-        console.log('Validation Failed: Missing input');
+    if (!isrName || !patientName || !location || !appointmentTime || !reminderTime) {
         document.getElementById('status').textContent = 'Please fill out all fields.';
         return;
     }
@@ -24,6 +22,7 @@ async function setReminder() {
         const { data, error } = await supabase
             .from('appointments')
             .insert([{ 
+                isr_name: isrName,
                 patient_name: patientName, 
                 location: location, 
                 appointment_time: appointmentTime, 
@@ -32,11 +31,9 @@ async function setReminder() {
             }]);
 
         if (error) {
-            console.error('Supabase Error: ', error);
             document.getElementById('status').textContent = 'Error setting the reminder.';
         } else {
-            console.log('Reminder Saved Successfully: ', data);
-            document.getElementById('status').textContent = `Reminder set for ${reminderTime}`;
+            document.getElementById('status').textContent = `Reminder set for ${new Date(reminderTime).toLocaleString()}`;
             addReminderToUI(data[0]);
             schedulePushNotification(new Date(reminderTime), data[0].id);
         }
@@ -61,7 +58,7 @@ function notifyUser(reminderId) {
         OneSignal.sendSelfNotification(
             "Reminder",
             "Time to call and confirm the appointment!",
-            "https://quartz4065.github.io",  // Correct URL
+            "https://quartz4065.github.io/ConfirmAlertSystem/",  // Correct URL
             {
                 action: "confirm",
                 actionText: "Mark as Completed"
@@ -74,11 +71,13 @@ async function loadReminders() {
     const { data: reminders, error } = await supabase
         .from('appointments')
         .select('*')
-        .eq('completed', false);
+        .eq('completed', false)
+        .order('isr_name', { ascending: true });  // Sort by ISR/Employee Name
 
     if (error) {
         console.error('Error loading reminders: ', error);
     } else {
+        document.getElementById('reminder-list').innerHTML = '';  // Clear list first
         reminders.forEach(addReminderToUI);
     }
 }
@@ -89,7 +88,7 @@ function addReminderToUI(reminder) {
     listItem.classList.add('reminder-item');
     listItem.id = `reminder-${reminder.id}`;
     listItem.innerHTML = `
-        <strong>${reminder.patient_name}</strong> - ${reminder.location}<br>
+        <strong>${reminder.isr_name}</strong> - ${reminder.patient_name}, ${reminder.location}<br>
         Appointment Time: ${new Date(reminder.appointment_time).toLocaleString()}<br>
         Reminder Time: ${new Date(reminder.reminder_time).toLocaleString()}<br>
         <button onclick="markAsCompleted('${reminder.id}')">Mark as Completed</button>
@@ -108,4 +107,21 @@ async function markAsCompleted(reminderId) {
     } else {
         document.getElementById(`reminder-${reminderId}`).remove();
     }
+}
+
+function filterReminders() {
+    const filterISR = document.getElementById('filter-isr').value.toLowerCase();
+    const filterLocation = document.getElementById('filter-location').value.toLowerCase();
+    const reminderItems = document.querySelectorAll('.reminder-item');
+
+    reminderItems.forEach(item => {
+        const isrName = item.querySelector('strong').textContent.toLowerCase();
+        const locationText = item.textContent.toLowerCase();
+
+        if (isrName.includes(filterISR) && locationText.includes(filterLocation)) {
+            item.style.display = '';
+        } else {
+            item.style.display = 'none';
+        }
+    });
 }
