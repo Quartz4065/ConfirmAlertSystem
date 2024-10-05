@@ -1,6 +1,7 @@
 // Initialize Supabase
 const supabaseUrl = 'https://akyxjjugvoygatvmdcew.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFreXhqanVndm95Z2F0dm1kY2V3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjgxMzgzNTksImV4cCI6MjA0MzcxNDM1OX0.tYy2TURvZA0FPteFMANyVWQe8urI7_Ilg8mrDEnA-cs';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFreXhqanVndm95Z2F0dm1kY2V3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjgxMzgzNTksImV4cCI6MjA0MzcxNDM1OX0.tYy2TURvZA0FPteFMANyVWQe8urI7_Ilg8mrDEnA-cs
+';
 const supabase = Supabase.createClient(supabaseUrl, supabaseKey);
 
 document.addEventListener('DOMContentLoaded', loadReminders);
@@ -15,8 +16,6 @@ async function setReminder() {
         document.getElementById('status').textContent = 'Please fill out all fields.';
         return;
     }
-
-    // Store the appointment in Supabase
     const { data, error } = await supabase
         .from('appointments')
         .insert([{ 
@@ -53,7 +52,7 @@ function notifyUser(reminderId) {
         OneSignal.sendSelfNotification(
             "Reminder",
             "Time to call and confirm the appointment!",
-            "https://your-site.com",
+            "https://your-site.com",  // Replace with your site URL
             {
                 action: "confirm",
                 actionText: "Mark as Completed"
