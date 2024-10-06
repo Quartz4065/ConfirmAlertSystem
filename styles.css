@@ -35,21 +35,15 @@ input, select, button {
     border-radius: 4px;
 }
 
-/* Add 1-inch space between the dropdowns and button */
-select {
-    margin-bottom: 20px;
-}
-
 /* Button styling */
 button {
-    background-color: #5cb85c; /* Bootstrap green button */
+    background-color: #5cb85c; /* Green button */
     color: white;
     border: none;
     cursor: pointer;
     border-radius: 4px;
 }
 
-/* Button hover effect */
 button:hover {
     background-color: #4cae4c;
 }
@@ -57,7 +51,7 @@ button:hover {
 /* Status message styling */
 #status {
     margin-top: 20px;
-    color: #d9534f; /* Bootstrap danger red for error messages */
+    color: #d9534f; /* Error message color */
     text-align: center;
 }
 
@@ -79,9 +73,9 @@ ul {
     justify-content: space-between;
 }
 
-/* Completed button styling inside reminder */
+/* Red Complete button styling inside reminder */
 .reminder-item button {
-    background-color: #d9534f; /* Red for the completed button */
+    background-color: #d9534f; /* Red for the Complete button */
     color: white;
     border: none;
     border-radius: 4px;
@@ -89,7 +83,6 @@ ul {
     cursor: pointer;
 }
 
-/* Completed button hover effect */
 .reminder-item button:hover {
     background-color: #c9302c;
 }
