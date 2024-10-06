@@ -14,58 +14,11 @@ function saveReminders() {
     localStorage.setItem('reminders', JSON.stringify(reminders)); // Convert array to JSON and save to local storage
 }
 
-// Function to generate time options for appointment time (on the hour from 7 AM to 4 PM)
-function generateAppointmentTimeOptions() {
-    const appointmentTimeSelect = document.getElementById('appointment-time');
-    for (let hour = 7; hour <= 16; hour++) {
-        let period = "AM";
-        let displayHour = hour;
-        if (hour > 12) {
-            displayHour = hour - 12;
-            period = "PM";
-        } else if (hour === 12) {
-            period = "PM";
-        }
-        const timeString = `${displayHour}:00 ${period}`;
-        
-        const option = document.createElement('option');
-        option.value = timeString;
-        option.textContent = timeString;
-        appointmentTimeSelect.appendChild(option);
-    }
-}
-
-// Function to generate time options for reminder time (half-hour intervals from 7:30 AM to 3:30 PM)
-function generateReminderTimeOptions() {
-    const reminderTimeSelect = document.getElementById('reminder-time');
-    for (let hour = 7; hour <= 15; hour++) {
-        let period = "AM";
-        let displayHour = hour;
-        if (hour > 12) {
-            displayHour = hour - 12;
-            period = "PM";
-        } else if (hour === 12) {
-            period = "PM";
-        }
-        // Generate half-hour intervals
-        const timeStringHalfHour = `${displayHour}:30 ${period}`;
-        
-        const optionHalfHour = document.createElement('option');
-        optionHalfHour.value = timeStringHalfHour;
-        optionHalfHour.textContent = timeStringHalfHour;
-        reminderTimeSelect.appendChild(optionHalfHour);
-    }
-}
-
 document.addEventListener('DOMContentLoaded', function () {
     console.log("DOM fully loaded and script running");
 
     // Load reminders when the page is loaded
     loadReminders();
-
-    // Generate time options for appointment and reminder time dropdowns
-    generateAppointmentTimeOptions();
-    generateReminderTimeOptions();
 
     function setReminder() {
         console.log("setReminder function called");
@@ -101,7 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
         reminders.push(reminder);
 
         // Sort reminders by the reminder time, from earliest to latest
-        reminders.sort((a, b) => new Date(`1970-01-01T${a.reminderTime}`) - new Date(`1970-01-01T${b.reminderTime}`));
+        reminders.sort((a, b) => new Date(a.reminderTime) - new Date(b.reminderTime));
 
         // Clear form fields after submission
         document.getElementById('employee-name').value = '';
@@ -131,8 +84,8 @@ document.addEventListener('DOMContentLoaded', function () {
             listItem.innerHTML = `
                 <div>
                     <strong>${reminder.employeeName}</strong> needs to confirm with <strong>${reminder.patientName}</strong> (${reminder.patientPhone})<br>
-                    Appointment at ${reminder.location} on ${reminder.appointmentTime}<br>
-                    Reminder time: ${reminder.reminderTime}
+                    Appointment at ${new Date(reminder.appointmentTime).toLocaleString()}<br>
+                    Reminder time: ${new Date(reminder.reminderTime).toLocaleString()}
                 </div>
                 <button onclick="markAsCompleted(${reminder.id})">Completed</button>
             `;
