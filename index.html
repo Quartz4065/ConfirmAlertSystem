@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Appointment Reminder</title>
+    <title>Appointment Reminder System</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js"></script>
+    <script defer src="script.js"></script> <!-- Use defer to load the script after DOM is ready -->
 </head>
 <body>
     <h1>Appointment Reminder System</h1>
@@ -29,7 +29,7 @@
         <label for="reminder-time">Reminder Time:</label>
         <input type="datetime-local" id="reminder-time" required>
 
-        <button onclick="setReminder()">Set Reminder</button>
+        <button>Set Reminder</button>
     </div>
 
     <div id="status"></div>
