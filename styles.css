@@ -1,113 +1,95 @@
-/* General body styling with a clean background */
+/* General body styling */
 body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 20px;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #f5f5f5; /* Light background */
-    color: #333;
-}
-
-/* Title Styling */
-h1, h2 {
-    color: #1976d2; /* Material Blue */
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-/* Flat panel design for containers */
-.glass-panel {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for panels */
-    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4; /* Light background */
+    color: #333; /* Dark text */
     margin: 20px;
-    width: 80%;
-    max-width: 600px;
+    padding: 20px;
+}
+
+/* Center the title and make it stand out */
+h1, h2 {
+    text-align: center;
+    color: #333333; /* Dark title */
+}
+
+/* Form container styling */
+.form-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff; /* White background for form */
+    border-radius: 8px;
+    border: 1px solid #cccccc; /* Light grey border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 /* Input field styling */
-input, select {
+input, select, button {
     display: block;
-    width: 100%;
-    padding: 12px;
     margin-bottom: 10px;
+    width: 100%;
+    padding: 10px;
     font-size: 16px;
-    border: 2px solid #ddd;
+    border: 1px solid #cccccc; /* Light border */
     border-radius: 4px;
-    background-color: #fafafa;
-    color: #333;
-    outline: none;
 }
 
-input:focus, select:focus {
-    border-color: #1976d2; /* Blue border on focus */
-}
-
-/* Material Design button styling */
-.glass-button {
-    background-color: #1976d2; /* Material Blue */
-    color: #fff;
-    padding: 10px 15px;
+/* Button styling */
+button {
+    background-color: #5cb85c; /* Green button */
+    color: white;
     border: none;
-    border-radius: 4px;
     cursor: pointer;
-    transition: background 0.3s ease;
-    font-weight: bold;
-    text-transform: uppercase;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Slight shadow */
+    border-radius: 4px;
 }
 
-.glass-button:hover {
-    background-color: #1565c0; /* Darker on hover */
+button:hover {
+    background-color: #4cae4c;
 }
 
 /* Status message styling */
 #status {
+    margin-top: 20px;
+    color: #d9534f; /* Error message color */
     text-align: center;
-    color: #d32f2f; /* Material Red */
 }
 
-/* Flat list for reminders */
+/* Reminder list styling */
 ul {
     list-style-type: none;
     padding: 0;
 }
 
+/* Individual reminder item styling */
 .reminder-item {
-    background-color: #fafafa;
-    color: #333;
-    padding: 15px;
+    background-color: #f9f9f9; /* Light grey for reminder items */
+    color: #333; /* Dark text */
+    padding: 10px;
     margin: 10px 0;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
+    border: 1px solid #ddd; /* Light border for reminders */
     display: flex;
     justify-content: space-between;
 }
 
-/* Red Complete button */
+/* Red Complete button styling inside reminder */
 .reminder-item button {
-    background-color: #d32f2f;
+    background-color: #d9534f; /* Red for the Complete button */
     color: white;
     border: none;
     border-radius: 4px;
-    padding: 6px 10px;
+    padding: 5px 10px;
     cursor: pointer;
-    font-size: 14px;
 }
 
 .reminder-item button:hover {
-    background-color: #b71c1c;
+    background-color: #c9302c;
 }
 
 /* Modal styling */
 .modal {
-    display: none;
+    display: none; /* Hidden by default */
     position: fixed;
     z-index: 1;
     left: 0;
@@ -118,19 +100,16 @@ ul {
 }
 
 .modal-content {
-    background-color: white;
+    background-color: #fff;
     margin: 15% auto;
     padding: 20px;
+    border: 1px solid #888;
     width: 80%;
-    max-width: 500px;
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    text-align: center;
 }
 
-/* Close button styling */
 .close-button {
-    color: #333;
+    color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -138,23 +117,24 @@ ul {
 
 .close-button:hover,
 .close-button:focus {
-    color: #1976d2;
+    color: black;
     text-decoration: none;
     cursor: pointer;
 }
 
-/* Popup dismiss button */
+/* Dismiss button in popup */
 .popup-dismiss-button {
-    background-color: #1976d2;
-    color: white;
+    display: block;
+    margin: 20px auto;
     padding: 10px 20px;
+    background-color: #d9534f;
+    color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
-    margin-top: 20px;
 }
 
 .popup-dismiss-button:hover {
-    background-color: #1565c0;
+    background-color: #c9302c;
 }
