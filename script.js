@@ -1,34 +1,53 @@
-// Placeholder reminder logic using basic JavaScript for now
-function setReminder() {
-    const employeeName = document.getElementById('employee-name').value;
-    const patientName = document.getElementById('patient-name').value;
-    const location = document.getElementById('location').value;
-    const appointmentTime = document.getElementById('appointment-time').value;
-    const reminderTime = document.getElementById('reminder-time').value;
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
 
-    // Input validation
-    if (!employeeName || !patientName || !location || !appointmentTime || !reminderTime) {
-        document.getElementById('status').textContent = "Please fill out all fields!";
-        return;
-    }
+h1, h2 {
+    text-align: center;
+}
 
-    // Display the reminder set message
-    document.getElementById('status').textContent = `Reminder set for ${reminderTime} to call and confirm ${patientName}'s appointment with ${employeeName}`;
+.form-container {
+    max-width: 500px;
+    margin: 0 auto;
+}
 
-    // Calculate time to reminder
-    const reminderDate = new Date(reminderTime);
-    const currentDate = new Date();
-    const timeUntilReminder = reminderDate - currentDate;
+input, button {
+    display: block;
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 10px;
+}
 
-    // Set a timeout to trigger the alert at the reminder time
-    setTimeout(() => {
-        alert(`Reminder: It's time for ${employeeName} to call and confirm ${patientName}'s appointment at ${location}`);
-    }, timeUntilReminder);
+button {
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
 
-    // Clear form fields after submission
-    document.getElementById('employee-name').value = '';
-    document.getElementById('patient-name').value = '';
-    document.getElementById('location').value = '';
-    document.getElementById('appointment-time').value = '';
-    document.getElementById('reminder-time').value = '';
+#status {
+    margin-top: 20px;
+    color: red;
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.reminder-item {
+    background-color: #e0f7fa;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.reminder-item input[type="checkbox"] {
+    margin-right: 10px;
 }
