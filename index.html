@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Reminder</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <h1>Appointment Reminder System</h1>
+
+    <div class="form-container">
+        <label for="employee-name">Employee Name:</label>
+        <input type="text" id="employee-name" required>
+
+        <label for="patient-name">Patient Name:</label>
+        <input type="text" id="patient-name" required>
+        
+        <label for="patient-phone">Patient Phone Number:</label>
+        <input type="tel" id="patient-phone" required>
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" required>
+
+        <label for="appointment-time">Appointment Time:</label>
+        <input type="datetime-local" id="appointment-time" required>
+
+        <label for="reminder-time">Reminder Time:</label>
+        <input type="datetime-local" id="reminder-time" required>
+
+        <button onclick="setReminder()">Set Reminder</button>
+    </div>
+
+    <div id="status"></div>
+
+    <h2>Reminders</h2>
+    <ul id="reminder-list"></ul>
+
+</body>
+</html>
