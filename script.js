@@ -14,6 +14,7 @@ function saveReminders() {
     localStorage.setItem('reminders', JSON.stringify(reminders)); // Convert array to JSON and save to local storage
 }
 
+// Function to display reminders
 function displayReminders() {
     const reminderList = document.getElementById('reminder-list');
     reminderList.innerHTML = '';  // Clear the list
@@ -27,6 +28,7 @@ function displayReminders() {
         listItem.innerHTML = `
             <div>
                 <strong>${reminder.employeeName}</strong> needs to confirm with <strong>${reminder.patientName}</strong> (${reminder.patientPhone})<br>
+                Location: ${reminder.location}<br>
                 Appointment at ${new Date(reminder.appointmentTime).toLocaleString()}<br>
                 Reminder time: ${new Date(reminder.reminderTime).toLocaleString()}
             </div>
@@ -37,6 +39,7 @@ function displayReminders() {
     });
 }
 
+// Function to create and set a new reminder
 function setReminder() {
     const employeeName = document.getElementById('employee-name').value;
     const patientName = document.getElementById('patient-name').value;
@@ -72,31 +75,4 @@ function setReminder() {
     document.getElementById('employee-name').value = '';
     document.getElementById('patient-name').value = '';
     document.getElementById('patient-phone').value = '';
-    document.getElementById('location').value = '';
-    document.getElementById('appointment-time').value = '';
-    document.getElementById('reminder-time').value = '';
-
-    // Save reminders to local storage
-    saveReminders();
-
-    // Display the updated reminder list
-    displayReminders();
-}
-
-function markAsCompleted(reminderId) {
-    // Remove the reminder from the array
-    reminders = reminders.filter(reminder => reminder.id !== reminderId);
-
-    // Save updated reminders to local storage
-    saveReminders();
-
-    // Refresh the reminder list
-    displayReminders();
-}
-
-// Load reminders and expose necessary functions to the global scope
-document.addEventListener('DOMContentLoaded', function () {
-    loadReminders();
-    window.setReminder = setReminder;
-    window.markAsCompleted = markAsCompleted;
-});
+    document.getElementById('location
