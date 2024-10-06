@@ -1,10 +1,11 @@
 let reminders = [];
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Make sure the button is ready to handle the click event
-    document.querySelector('button').onclick = setReminder;
+    console.log("DOM fully loaded and script running");
 
     function setReminder() {
+        console.log("setReminder function called");
+
         const employeeName = document.getElementById('employee-name').value;
         const patientName = document.getElementById('patient-name').value;
         const patientPhone = document.getElementById('patient-phone').value;
@@ -15,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Input validation
         if (!employeeName || !patientName || !patientPhone || !location || !appointmentTime || !reminderTime) {
             document.getElementById('status').textContent = "Please fill out all fields!";
+            console.log("Form not filled out correctly");
             return;
         }
 
@@ -28,6 +30,8 @@ document.addEventListener('DOMContentLoaded', function () {
             appointmentTime,
             reminderTime,
         };
+
+        console.log("Reminder object created:", reminder);
 
         // Add reminder to the array
         reminders.push(reminder);
@@ -77,4 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Refresh the reminder list
         displayReminders();
     }
+
+    // Expose the setReminder function to the global scope so the onclick handler works
+    window.setReminder = setReminder;
 });
