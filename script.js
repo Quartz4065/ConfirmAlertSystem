@@ -73,4 +73,70 @@ function setReminder() {
 
     // Clear form fields after submission
     document.getElementById('employee-name').value = '';
-    document.getElementById('patient-name').value
+    document.getElementById('patient-name').value = '';
+    document.getElementById('patient-phone').value = '';
+    document.getElementById('location').value = '';
+    document.getElementById('appointment-time').value = '';
+    document.getElementById('reminder-time').value = '';
+
+    // Save reminders to local storage
+    saveReminders();
+
+    // Display the updated reminder list
+    displayReminders();
+}
+
+// Function to mark a reminder as completed and remove it from the list
+function markAsCompleted(reminderId) {
+    // Remove the reminder from the array
+    reminders = reminders.filter(reminder => reminder.id !== reminderId);
+
+    // Save updated reminders to local storage
+    saveReminders();
+
+    // Refresh the reminder list
+    displayReminders();
+}
+
+// Function to dismiss the popup
+function dismissPopup() {
+    document.getElementById('reminder-popup').style.display = 'none';
+}
+
+// Function to show a reminder popup
+function showReminderPopup(reminder) {
+    const popup = document.getElementById('reminder-popup');
+    const popupContent = document.getElementById('popup-content');
+
+    popupContent.innerHTML = `
+        <p><strong>${reminder.employeeName}</strong> needs to confirm with <strong>${reminder.patientName}</strong> (${reminder.patientPhone})</p>
+        <p>Location: ${reminder.location}</p>
+        <p>Appointment at ${new Date(reminder.appointmentTime).toLocaleString()}</p>
+        <p>Reminder time: ${new Date(reminder.reminderTime).toLocaleString()}</p>
+    `;
+
+    popup.style.display = 'block';
+}
+
+// Function to check if it's time for a reminder
+function checkReminders() {
+    const now = new Date();
+    reminders.forEach(reminder => {
+        const reminderTime = new Date(reminder.reminderTime);
+        // If the reminder time is now or past, show the popup
+        if (reminderTime <= now) {
+            showReminderPopup(reminder);
+        }
+    });
+}
+
+// Load reminders and expose necessary functions to the global scope
+document.addEventListener('DOMContentLoaded', function () {
+    loadReminders();
+    window.setReminder = setReminder;
+    window.markAsCompleted = markAsCompleted;
+    window.dismissPopup = dismissPopup;
+
+    // Check for reminders every minute
+    setInterval(checkReminders, 60000); // 60000 milliseconds = 1 minute
+});
