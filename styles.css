@@ -121,3 +121,20 @@ ul {
     text-decoration: none;
     cursor: pointer;
 }
+
+/* Dismiss button in popup */
+.popup-dismiss-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.popup-dismiss-button:hover {
+    background-color: #c9302c;
+}
