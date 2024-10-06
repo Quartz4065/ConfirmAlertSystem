@@ -1,0 +1,160 @@
+/* General body styling with a clean background */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 20px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f5f5; /* Light background */
+    color: #333;
+}
+
+/* Title Styling */
+h1, h2 {
+    color: #1976d2; /* Material Blue */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Flat panel design for containers */
+.glass-panel {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for panels */
+    padding: 20px;
+    margin: 20px;
+    width: 80%;
+    max-width: 600px;
+}
+
+/* Input field styling */
+input, select {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    background-color: #fafafa;
+    color: #333;
+    outline: none;
+}
+
+input:focus, select:focus {
+    border-color: #1976d2; /* Blue border on focus */
+}
+
+/* Material Design button styling */
+.glass-button {
+    background-color: #1976d2; /* Material Blue */
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Slight shadow */
+}
+
+.glass-button:hover {
+    background-color: #1565c0; /* Darker on hover */
+}
+
+/* Status message styling */
+#status {
+    text-align: center;
+    color: #d32f2f; /* Material Red */
+}
+
+/* Flat list for reminders */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.reminder-item {
+    background-color: #fafafa;
+    color: #333;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Red Complete button */
+.reminder-item button {
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.reminder-item button:hover {
+    background-color: #b71c1c;
+}
+
+/* Modal styling */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Close button styling */
+.close-button {
+    color: #333;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #1976d2;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Popup dismiss button */
+.popup-dismiss-button {
+    background-color: #1976d2;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.popup-dismiss-button:hover {
+    background-color: #1565c0;
+}
