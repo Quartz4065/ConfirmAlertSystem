@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     Appointment at ${new Date(reminder.appointmentTime).toLocaleString()}<br>
                     Reminder time: ${new Date(reminder.reminderTime).toLocaleString()}
                 </div>
-                <button onclick="markAsCompleted(${reminder.id})">Completed</button>
+                <button onclick="markAsCompleted(${reminder.id})">Complete</button>
             `;
 
             reminderList.appendChild(listItem);
