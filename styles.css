@@ -29,6 +29,9 @@ input, button {
     width: 100%;
     padding: 10px;
     font-size: 16px;
+    background-color: #222222; /* Slightly lighter grey */
+    color: #ffffff; /* White text for inputs */
+    border: 1px solid #00ff00; /* Bright green border */
 }
 
 /* Button styling */
