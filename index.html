@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Appointment Reminder System</title>
     <link rel="stylesheet" href="styles.css">
-    <script defer src="script.js"></script> <!-- Ensure the script loads after the DOM -->
+    <script defer src="script.js"></script>
 </head>
 <body>
     <h1>Appointment Reminder System</h1>
 
-    <div class="form-container">
+    <div class="form-container glass-panel">
         <label for="employee-name">Employee Name:</label>
         <input type="text" id="employee-name" required>
 
@@ -23,30 +23,30 @@
         <label for="location">Location:</label>
         <input type="text" id="location" required>
 
-        <!-- New DateTime picker for Appointment Time -->
+        <!-- DateTime picker for Appointment Time -->
         <label for="appointment-time">Appointment Time:</label>
         <input type="datetime-local" id="appointment-time" required>
 
-        <!-- New DateTime picker for Reminder Time -->
+        <!-- DateTime picker for Reminder Time -->
         <label for="reminder-time">Reminder Time:</label>
         <input type="datetime-local" id="reminder-time" required>
 
-        <button onclick="setReminder()">Set Reminder</button> <!-- Button triggers the setReminder function -->
+        <button class="glass-button" onclick="setReminder()">Set Reminder</button>
     </div>
 
-    <div id="status"></div>
+    <div id="status" class="glass-panel"></div>
 
     <h2>Reminders</h2>
-    <ul id="reminder-list"></ul>
+    <ul id="reminder-list" class="glass-panel"></ul>
 
     <!-- Modal for Reminder Popup -->
-    <div id="reminder-popup" class="modal">
-        <div class="modal-content">
+    <div id="reminder-popup" class="modal glass-panel">
+        <div class="modal-content glass-panel">
             <span class="close-button" onclick="dismissPopup()">&times;</span>
             <div id="popup-content">
                 <!-- Reminder details will be injected here -->
             </div>
-            <button class="popup-dismiss-button" onclick="dismissPopup()">Dismiss</button>
+            <button class="popup-dismiss-button glass-button" onclick="dismissPopup()">Dismiss</button>
         </div>
     </div>
 
