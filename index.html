@@ -39,5 +39,16 @@
     <h2>Reminders</h2>
     <ul id="reminder-list"></ul>
 
+    <!-- Modal for Reminder Popup -->
+    <div id="reminder-popup" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="dismissPopup()">&times;</span>
+            <div id="popup-content">
+                <!-- Reminder details will be injected here -->
+            </div>
+            <button onclick="dismissPopup()">Dismiss</button>
+        </div>
+    </div>
+
 </body>
 </html>
