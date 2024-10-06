@@ -73,6 +73,4 @@ function setReminder() {
 
     // Clear form fields after submission
     document.getElementById('employee-name').value = '';
-    document.getElementById('patient-name').value = '';
-    document.getElementById('patient-phone').value = '';
-    document.getElementById('location
+    document.getElementById('patient-name').value
