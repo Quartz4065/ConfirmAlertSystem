@@ -23,16 +23,15 @@
         <label for="location">Location:</label>
         <input type="text" id="location" required>
 
-        <!-- New Dropdown for Appointment Time -->
+        <!-- New DateTime picker for Appointment Time -->
         <label for="appointment-time">Appointment Time:</label>
-        <select id="appointment-time" required></select>
+        <input type="datetime-local" id="appointment-time" required>
 
-        <!-- New Dropdown for Reminder Time -->
+        <!-- New DateTime picker for Reminder Time -->
         <label for="reminder-time">Reminder Time:</label>
-        <select id="reminder-time" required></select>
+        <input type="datetime-local" id="reminder-time" required>
 
-        <!-- Add Set Reminder Button -->
-        <button onclick="setReminder()">Set Reminder</button>
+        <button onclick="setReminder()">Set Reminder</button> <!-- Button triggers the setReminder function -->
     </div>
 
     <div id="status"></div>
