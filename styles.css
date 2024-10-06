@@ -1,8 +1,8 @@
 /* General body styling */
 body {
     font-family: Arial, sans-serif;
-    background-color: #000000; /* Black background */
-    color: #ffffff; /* White text */
+    background-color: #f4f4f4; /* Light background */
+    color: #333; /* Dark text */
     margin: 20px;
     padding: 20px;
 }
@@ -10,7 +10,7 @@ body {
 /* Center the title and make it stand out */
 h1, h2 {
     text-align: center;
-    color: #00ff00; /* Bright green for the title */
+    color: #333333; /* Dark title */
 }
 
 /* Form container styling */
@@ -18,8 +18,10 @@ h1, h2 {
     max-width: 500px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #333333; /* Dark grey form container */
+    background-color: #ffffff; /* White background for form */
     border-radius: 8px;
+    border: 1px solid #cccccc; /* Light grey border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 /* Input field styling */
@@ -29,23 +31,28 @@ input, button {
     width: 100%;
     padding: 10px;
     font-size: 16px;
-    background-color: #222222; /* Slightly lighter grey */
-    color: #ffffff; /* White text for inputs */
-    border: 1px solid #00ff00; /* Bright green border */
+    border: 1px solid #cccccc; /* Light border */
+    border-radius: 4px;
 }
 
 /* Button styling */
 button {
-    background-color: #00ff00; /* Bright green button */
-    color: black;
+    background-color: #5cb85c; /* Bootstrap green button */
+    color: white;
     border: none;
     cursor: pointer;
+    border-radius: 4px;
+}
+
+/* Button hover effect */
+button:hover {
+    background-color: #4cae4c;
 }
 
 /* Status message styling */
 #status {
     margin-top: 20px;
-    color: #ffcc00; /* Yellow for status messages */
+    color: #d9534f; /* Bootstrap danger red for error messages */
     text-align: center;
 }
 
@@ -57,11 +64,12 @@ ul {
 
 /* Individual reminder item styling */
 .reminder-item {
-    background-color: #444444; /* Dark grey background for reminders */
-    color: #ffffff; /* White text */
+    background-color: #f9f9f9; /* Light grey for reminder items */
+    color: #333; /* Dark text */
     padding: 10px;
     margin: 10px 0;
     border-radius: 5px;
+    border: 1px solid #ddd; /* Light border for reminders */
     display: flex;
     justify-content: space-between;
 }
