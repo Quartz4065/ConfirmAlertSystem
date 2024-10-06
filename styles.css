@@ -25,7 +25,7 @@ h1, h2 {
 }
 
 /* Input field styling */
-input, button {
+input, select, button {
     display: block;
     margin-bottom: 10px;
     width: 100%;
@@ -33,6 +33,11 @@ input, button {
     font-size: 16px;
     border: 1px solid #cccccc; /* Light border */
     border-radius: 4px;
+}
+
+/* Add 1-inch space between the dropdowns and button */
+select {
+    margin-bottom: 20px;
 }
 
 /* Button styling */
